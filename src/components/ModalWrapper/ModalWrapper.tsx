@@ -17,9 +17,8 @@ export const ModalWrapper = ({
                              }: ModalWrapperProps): JSX.Element | null => {
     
     const modalRef = useRef(null);
-    
     useOutsideClick(modalRef, onClose);
-    
+  
     if (!isOpen) return null;
     
     document.onkeydown = (e: KeyboardEvent) => {
