@@ -23,7 +23,7 @@ export const SelectData = ({children, className, ...props}: SelectDataProps): JS
                 value={date}
                 className={styles.InputMask}
                 mask='99.99.9999'
-                placeholder='dd.mm.yyyy'>
+                placeholder='dd.mm.yy'>
             </InputMask>
         </div>
     

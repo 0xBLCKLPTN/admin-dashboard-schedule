@@ -1,32 +1,45 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from './ModalWrapper.module.scss'
 import {ModalWrapperProps} from './ModalWrapper.props'
 import cn from "classnames";
 import {Card} from "../Card/Card";
 import {createPortal} from "react-dom";
+import {useOutsideClick} from "../../hooks/useOutsideClick";
 
-export const ModalWrapper = ({width, height, children, className, ...props}: ModalWrapperProps): JSX.Element => {
+export const ModalWrapper = ({
+                                 isOpen,
+                                 onClose,
+                                 width,
+                                 height,
+                                 children,
+                                 className,
+                                 ...props
+                             }: ModalWrapperProps): JSX.Element | null => {
     
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const modalRef = useRef(null);
+    
+    useOutsideClick(modalRef, onClose);
+    
+    if (!isOpen) return null;
     
     document.onkeydown = (e: KeyboardEvent) => {
-        if (e.key === "Escape" && showModal) {
-            setShowModal(false)
+        if (e.key === "Escape" && isOpen) {
+            onClose()
         }
     }
     
     return (
-        <div className={className} {...props}>
-            <button onClick={() => setShowModal(true)}>Нажать</button>
-            {showModal && createPortal(
-                (<div onClick={() => setShowModal(false)}
-                      className={styles.ModalWrapper}>
-                    <Card onClick={(e) => e.stopPropagation()} width={width} height={height}>
+        <>
+            {isOpen && createPortal(
+                (<div className={styles.ModalWrapper}>
+                    <Card ref={modalRef} className={styles.card} width={width}
+                          height={height}>
+                        <img onClick={onClose} className={styles.img} src="/close.svg" alt="close"/>
                         {children}
                     </Card>
                 </div>), document.getElementById("modal")!
             )}
-        </div>
+        </>
     )
 }
 

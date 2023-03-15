@@ -14,22 +14,22 @@ const obj2 = {
     list: ['4А1', '4В1', '4ПР1+4ПР2', '4ПК1',]
 }
 
-export const ViewSchedule = ({children, className, ...props}: ViewScheduleProps): JSX.Element => {
+export const ViewSchedule = ({isOpen, onClose, children, className, ...props}: ViewScheduleProps): JSX.Element => {
+    
     return (
-        <ModalWrapper height={"HL"} width={"WL"}>
+        <ModalWrapper isOpen={isOpen} onClose={onClose} height={"HL"} width={"WL"}>
             <div className={styles.titleWrapper}>
                 <div className={styles.title}>
                     <Text size={"L"}>Просмотр расписания</Text>
                     <Text size={"M"} isDark>Для определенной группы</Text>
                 </div>
-                <img className={styles.img} src="/close.svg" alt="close"/>
             </div>
             <div className={styles.body}>
                 <div className={styles.bodyHeader}>
                     <SelectData/>
                     <DropDown obj={obj1}></DropDown>
                     <DropDown obj={obj2}></DropDown>
-                    <Input isSearch isBorder/>
+                    <Input placeholder={'Искать среди групп'} isSearch isBorder/>
                     <Button color={"primary"}>Готово</Button>
                 </div>
             </div>

@@ -1,28 +1,39 @@
 @import "../../styles/_variables.scss";
 
+
+
 .dropdown {
   cursor: pointer;
   position: relative;
 }
-
-.title {
-  display: flex;
-  gap: 8px;
+.titleWrapper{
   padding: 8px 8px 8px 16px;
   border: 1px solid $lightgrey;
   border-radius: 12px;
-  background: $white;
-  justify-content: space-between;
-  align-self: center;
   max-height: 36px;
 }
 
+.title {
+  width: auto;
+  display: flex;
+  gap: 8px;
+  background: $white;
+  justify-content: space-between;
+}
+
 .text {
+  align-self: center;
   white-space: nowrap;
 }
 
 .arrowUP {
   rotate: 180deg;
+}
+
+.img {
+  align-self: center;
+  width: 16px;
+  height: 16px;
 }
 
 .list {
@@ -41,6 +52,7 @@
   font-size: 16px;
   line-height: 24px;
   white-space: nowrap;
+  min-width: 55px;
 }
 
 .item:first-child {
@@ -53,5 +65,5 @@
 }
 
 .hidden {
-  opacity: 0;
+  visibility: hidden;
 }
